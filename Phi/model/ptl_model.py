@@ -11,7 +11,6 @@ class Phi2Model(pl.LightningModule):
         self.eps= config.eps
         model= AutoModelForCausalLM.from_pretrained(
             config.model,
-            cache_dir= config.cache_dir,
         )
 
         self.model = get_peft_model(model, config.peft_config)

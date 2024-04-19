@@ -13,9 +13,8 @@ from peft import LoraConfig, TaskType
 
 #phi2
 MODEL_NAME= 'microsoft/phi-2'
-DS_PATH = '../synthetic_ds_phi.pq'
+DS_PATH = Checkpoint(os.path.join(os.path.dirname(__file__), '../synthetic_ds_phi.pq'))
 CHECKPOINT= Checkpoint(os.path.join(os.path.dirname(__file__), '../checkpoints'))
-CACHE= '/home/abiel/.cache/huggingface/hub'
 
 PEFT_CONFIG= LoraConfig(
     task_type=TaskType.CAUSAL_LM,
@@ -47,7 +46,6 @@ class TrainConfig:
     ds_path: str= DS_PATH
     ckpt: Checkpoint= CHECKPOINT
     strategy: RayFSDPStrategy= FSDP
-    cache_dir: str= CACHE
     num_worker: int= 1
     batch_size_per_worker: int= 2
     resources: dict= {'GPU': 2, 'memory': 1.536e10}
