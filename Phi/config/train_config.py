@@ -13,7 +13,7 @@ from peft import LoraConfig, TaskType
 
 #phi2
 MODEL_NAME= 'microsoft/phi-2'
-DS_PATH = Checkpoint(os.path.join(os.path.dirname(__file__), '../synthetic_ds_phi.pq'))
+DS_PATH = Checkpoint(os.path.join(os.path.dirname(__file__), '../synthetic_ds.pq'))
 CHECKPOINT= Checkpoint(os.path.join(os.path.dirname(__file__), '../checkpoints'))
 
 PEFT_CONFIG= LoraConfig(
@@ -48,7 +48,7 @@ class TrainConfig:
     strategy: RayFSDPStrategy= FSDP
     num_worker: int= 1
     batch_size_per_worker: int= 2
-    resources: dict= {'GPU': 2, 'memory': 1.536e10}
+    resources: dict= {'GPU': 1}
     log_every_n_steps: int= 1
     devices: str= 'auto'
     acclerator: str= 'auto'
